@@ -3,13 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Mauro/Desktop/desafio_asenjo/web/adicionar.jsp</file>
-            <file>file:/C:/Users/Mauro/Desktop/desafio_asenjo/src/java/modelo/DAL.java</file>
-            <file>file:/C:/Users/Mauro/Desktop/desafio_asenjo/src/java/modelo/Livro.java</file>
-            <file>file:/C:/Users/Mauro/Desktop/desafio_asenjo/web/consultar.jsp</file>
-            <file>file:/C:/Users/Mauro/Desktop/desafio_asenjo/web/atualizar.jsp</file>
-            <file>file:/C:/Users/Mauro/Desktop/desafio_asenjo/web/index.html</file>
-            <file>file:/C:/Users/Mauro/Desktop/desafio_asenjo/web/deletar.jsp</file>
+            <file>file:/C:/Users/Mauro/Desktop/crud_java_jsp/src/java/modelo/ALDAL.java</file>
+            <file>file:/C:/Users/Mauro/Desktop/crud_java_jsp/src/java/modelo/Livro.java</file>
+            <file>file:/C:/Users/Mauro/Desktop/crud_java_jsp/src/java/modelo/Config.java</file>
+            <file>file:/C:/Users/Mauro/Desktop/crud_java_jsp/web/consultar.jsp</file>
+            <file>file:/C:/Users/Mauro/Desktop/crud_java_jsp/src/java/modelo/Erro.java</file>
+            <file>file:/C:/Users/Mauro/Desktop/crud_java_jsp/web/deletar.jsp</file>
+            <file>file:/C:/Users/Mauro/Desktop/crud_java_jsp/web/index.jsp</file>
+            <file>file:/C:/Users/Mauro/Desktop/crud_java_jsp/src/java/modelo/AFDAL.java</file>
+            <file>file:/C:/Users/Mauro/Desktop/crud_java_jsp/web/adicionar.jsp</file>
+            <file>file:/C:/Users/Mauro/Desktop/crud_java_jsp/web/atualizar.jsp</file>
         </group>
     </open-files>
 </project-private>

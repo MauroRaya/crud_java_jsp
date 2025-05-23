@@ -1,5 +1,6 @@
-<%@ page import="modelo.DAL" %>
 <%@ page import="modelo.Livro" %>
+<%@ page import="modelo.ALDAL" %>
+<%@ page import="modelo.Erro" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -9,24 +10,24 @@
 </head>
 <body>
 
-<h2>Consultar Livro por ID</h2>
+<h2>Consultar Livro por Código</h2>
 
 <%
-    String idParam = request.getParameter("id");
+    String idParam = request.getParameter("codigo");
     String mensagem = "";
     boolean encontrou = false;
+    Livro livro = new Livro();
 
     if (idParam != null && !idParam.trim().isEmpty()) {
         try {
-            Livro.setId(idParam);
-            Livro.setAutor(null);
-            Livro.setEditora(null);
-            Livro.setAno(null);
+            livro.setCodigo(idParam);
 
-            DAL.get();
+            ALDAL.get(livro);
 
-            if (Livro.getTitulo() == null) {
-                mensagem = "Nenhum livro encontrado com o ID " + idParam + ".";
+            if (Erro.getErro()) {
+                mensagem = "Erro ao consultar o livro: " + Erro.getMens();
+            } else if (livro.getTitulo() == null || livro.getTitulo().isEmpty()) {
+                mensagem = "Nenhum livro encontrado com o código " + idParam + ".";
             } else {
                 encontrou = true;
             }
@@ -41,20 +42,21 @@
 <% } %>
 
 <form action="consultar.jsp" method="get">
-    <label for="id">ID do Livro:</label><br>
-    <input type="number" id="id" name="id" required><br><br>
+    <label for="codigo">Código:</label><br>
+    <input type="number" name="codigo" id="codigo" required min="1"><br><br>
     <input type="submit" value="Consultar">
-    <a href="index.html">Voltar</a>
+    <a href="index.jsp">Voltar</a>
 </form>
 
 <% if (encontrou) { %>
     <hr>
     <h3>Livro encontrado:</h3>
-    <p><strong>ID:</strong> <%= Livro.getId() %></p>
-    <p><strong>Título:</strong> <%= Livro.getTitulo() %></p>
-    <p><strong>Autor:</strong> <%= Livro.getAutor() %></p>
-    <p><strong>Editora:</strong> <%= Livro.getEditora() %></p>
-    <p><strong>Ano:</strong> <%= Livro.getAno() %></p>
+    <p><strong>Código:</strong> <%= livro.getCodigo() %></p>
+    <p><strong>Título:</strong> <%= livro.getTitulo() %></p>
+    <p><strong>Autor:</strong> <%= livro.getAutor() %></p>
+    <p><strong>Editora:</strong> <%= livro.getEditora() %></p>
+    <p><strong>Ano:</strong> <%= livro.getAno() %></p>
+    <p><strong>Localização:</strong> <%= livro.getLocalizacao() %></p>
 <% } %>
 
 </body>

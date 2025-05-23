@@ -1,6 +1,6 @@
-<%@ page import="java.sql.*" %>
 <%@ page import="modelo.Livro" %>
-<%@ page import="modelo.DAL" %>
+<%@ page import="modelo.ALDAL" %>
+<%@ page import="modelo.Erro" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -17,27 +17,26 @@
 
     if ("POST".equalsIgnoreCase(request.getMethod())) {
         try {
-            int id = Integer.parseInt(request.getParameter("id"));
-            String titulo = request.getParameter("titulo");
-            String autor = request.getParameter("autor");
-            String editora = request.getParameter("editora");
+            int codigo = Integer.parseInt(request.getParameter("codigo"));
             int ano = Integer.parseInt(request.getParameter("ano"));
 
-            Livro.setId(String.valueOf(id));
-            Livro.setTitulo(titulo);
-            Livro.setAutor(autor);
-            Livro.setEditora(editora);
-            Livro.setAno(String.valueOf(ano));
+            Livro livro = new Livro();
+            livro.setCodigo(String.valueOf(codigo));
+            livro.setTitulo(request.getParameter("titulo"));
+            livro.setAutor(request.getParameter("autor"));
+            livro.setEditora(request.getParameter("editora"));
+            livro.setAno(String.valueOf(ano));
+            livro.setLocalizacao(request.getParameter("localizacao"));
+            
+            ALDAL.set(livro);
 
-            DAL.add();
-
-            mensagem = "Livro adicionado com sucesso!";
-        } catch (Exception e) {
-            if (e.getMessage() != null && e.getMessage().contains("PRIMARY KEY")) {
-                mensagem = "Já existe um livro com esse código (ID).";
+            if (Erro.getErro()) {
+                mensagem = "Erro ao adicionar livro: " + Erro.getMens();
             } else {
-                mensagem = "Erro ao adicionar livro: " + e.getMessage();
+                mensagem = "Livro adicionado com sucesso!";
             }
+        } catch (Exception e) {
+            mensagem = "Erro ao adicionar livro: " + e.getMessage();
         }
     }
 %>
@@ -48,8 +47,8 @@
 
 <form action="adicionar.jsp" method="post">
 
-    <label for="id">Código:</label><br>
-    <input type="number" name="id" id="id" required min="1"><br><br>
+    <label for="codigo">Código:</label><br>
+    <input type="number" name="codigo" id="codigo" required min="1"><br><br>
 
     <label for="titulo">Título:</label><br>
     <input type="text" name="titulo" id="titulo" required maxlength="100"><br><br>
@@ -63,8 +62,11 @@
     <label for="ano">Ano:</label><br>
     <input type="number" name="ano" id="ano" required min="0" max="2025"><br><br>
 
+    <label for="localizacao">Localização:</label><br>
+    <input type="text" name="localizacao" id="localizacao" maxlength="50"><br><br>
+
     <button type="submit">Salvar</button>
-    <a href="index.html">Voltar</a>
+    <a href="index.jsp">Voltar</a>
 
 </form>
 

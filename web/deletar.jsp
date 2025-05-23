@@ -1,11 +1,6 @@
-<%-- 
-    Document   : deletar
-    Created on : 22/05/2025, 09:17:33
-    Author     : Mauro
---%>
-
 <%@ page import="modelo.Livro" %>
-<%@ page import="modelo.DAL" %>
+<%@ page import="modelo.ALDAL" %>
+<%@ page import="modelo.Erro" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -21,21 +16,21 @@
     String mensagem = "";
 
     if ("POST".equalsIgnoreCase(request.getMethod())) {
-
         try {
-            int id = Integer.parseInt(request.getParameter("id"));
-            Livro.setId(String.valueOf(id));
-            Livro.setAutor(null);
-            Livro.setEditora(null);
-            Livro.setAno(null);
+            int codigo = Integer.parseInt(request.getParameter("codigo"));
+            
+            Livro livro = new Livro();
+            livro.setCodigo(String.valueOf(codigo));
+            
+            ALDAL.delete(livro);
 
-            int resultado = DAL.delete();
-
-            if (resultado > 0) {
-                mensagem = "Livro excluído com sucesso.";
+            if (Erro.getErro()) {
+                mensagem = "Erro ao excluir livro: " + Erro.getMens();
             } else {
-                mensagem = "Nenhum livro encontrado com o ID fornecido.";
+                mensagem = "Livro deletado com sucesso.";
             }
+        } catch (NumberFormatException nfe) {
+            mensagem = "Código inválido.";
         } catch (Exception e) {
             mensagem = "Erro ao excluir livro: " + e.getMessage();
         }
@@ -47,11 +42,11 @@
 <% } %>
 
 <form action="deletar.jsp" method="post">
-    <label for="id">ID do Livro a Excluir:</label><br>
-    <input type="number" name="id" id="id" required min="1"><br><br>
+    <label for="codigo">Código:</label><br>
+    <input type="number" name="codigo" id="codigo" required min="1"><br><br>
 
     <button type="submit">Excluir</button>
-    <a href="index.html">Voltar</a>
+    <a href="index.jsp">Voltar</a>
 </form>
 
 </body>

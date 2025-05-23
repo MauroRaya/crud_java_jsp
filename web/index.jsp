@@ -1,3 +1,5 @@
+<%@page import="modelo.Livro"%>
+<%@page import="modelo.ALDAL"%>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -11,7 +13,10 @@ and open the template in the editor.
     <title>CRUD Links</title>
 </head>
 <body>
-    <h1>OperaÃ§Ãµes CRUD</h1>
+<%
+    ALDAL.geraTabela(new Livro());
+%>
+    <h1>Operações CRUD</h1>
     <ul>
         <li><a href="consultar.jsp">Consultar</a></li>
         <li><a href="adicionar.jsp">Adicionar</a></li>
