@@ -50,7 +50,7 @@
             } else if (chaves.getTitulo() == null) {
                 mensagem = "Erro ao atualizar livro: " + Erro.getMens();
             } else {
-                mensagem = "Lirvo atualizado com sucesso";
+                mensagem = "Livro atualizado com sucesso";
             }
                         
         } catch (Exception e) {
