@@ -21,14 +21,30 @@
             
             Livro livro = new Livro();
             livro.setCodigo(String.valueOf(codigo));
+            livro.setTitulo(null);
+            livro.setAutor(null);
+            livro.setEditora(null);
+            livro.setAno(null);
+            livro.setLocalizacao(null);
+
+            ALDAL.get(livro);
+            
+            if (Erro.getErro()) {
+                mensagem = "Erro ao deletar livro: " + Erro.getMens();
+            } else if (livro.getTitulo() == null) {
+                mensagem = "Erro ao deletar livro: " + Erro.getMens();
+            }
             
             ALDAL.delete(livro);
 
             if (Erro.getErro()) {
                 mensagem = "Erro ao excluir livro: " + Erro.getMens();
+            } else if (livro.getTitulo() == null) {
+                mensagem = "Erro ao deletar livro: " + Erro.getMens();
             } else {
-                mensagem = "Livro deletado com sucesso.";
+                mensagem = "Livro deletado com sucesso";
             }
+           
         } catch (NumberFormatException nfe) {
             mensagem = "Código inválido.";
         } catch (Exception e) {

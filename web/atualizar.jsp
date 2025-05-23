@@ -41,9 +41,18 @@
 
             if (Erro.getErro()) {
                 mensagem = "Erro ao atualizar livro: " + Erro.getMens();
-            } else {
-                mensagem = "Livro atualizado com sucesso!";
             }
+            
+            ALDAL.get(chaves);
+            
+            if (Erro.getErro()) {
+                mensagem = "Erro ao atualizar livro: " + Erro.getMens();
+            } else if (chaves.getTitulo() == null) {
+                mensagem = "Erro ao atualizar livro: " + Erro.getMens();
+            } else {
+                mensagem = "Lirvo atualizado com sucesso";
+            }
+                        
         } catch (Exception e) {
             mensagem = "Erro ao atualizar livro: " + e.getMessage();
         }
